@@ -1,125 +1,726 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+/* Default font for first paint; theme picker can swap via --ff-base */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-:root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+/* ─── Self-hosted fonts (selectable via theme picker) ─── */
+@font-face {
+	font-family: 'Hack';
+	src: url('/fonts/HackNerdFont-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
+@font-face {
+	font-family: 'Hack';
+	src: url('/fonts/HackNerdFont-Bold.woff2') format('woff2');
 	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-a {
-	color: var(--accent);
+
+@font-face {
+	font-family: 'CommitMono';
+	src: url('/fonts/CommitMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-a:hover {
-	color: var(--accent);
+@font-face {
+	font-family: 'CommitMono';
+	src: url('/fonts/CommitMono-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-p {
-	margin-bottom: 1em;
+
+@font-face {
+	font-family: 'Comic Mono';
+	src: url('/fonts/ComicMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-.prose p {
-	margin-bottom: 2em;
+@font-face {
+	font-family: 'Comic Mono';
+	src: url('/fonts/ComicMono-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+@font-face {
+	font-family: 'Iosevka';
+	src: url('/fonts/Iosevka-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-input {
-	font-size: 16px;
+@font-face {
+	font-family: 'Iosevka';
+	src: url('/fonts/Iosevka-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-table {
-	width: 100%;
+
+@font-face {
+	font-family: 'Meslo LG M';
+	src: url('/fonts/MesloLGM-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
+@font-face {
+	font-family: 'Meslo LG M';
+	src: url('/fonts/MesloLGM-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+
+@font-face {
+	font-family: 'Monaspace Neon';
+	src: url('/fonts/MonaspaceNeon-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+@font-face {
+	font-family: 'Monaspace Neon';
+	src: url('/fonts/MonaspaceNeon-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
-pre > code {
-	all: unset;
+
+@font-face {
+	font-family: 'Serious Shanns';
+	src: url('/fonts/SeriousShanns-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
+@font-face {
+	font-family: 'Serious Shanns';
+	src: url('/fonts/SeriousShanns-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Comic Shanns';
+	src: url('/fonts/ComicShanns-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Comic Shanns';
+	src: url('/fonts/ComicShanns-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Reset adapted from Squidfunk MkDocs Material (MIT, Martin Donath) */
+html {
+	box-sizing: border-box;
+	text-size-adjust: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion) {
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
+	}
+}
+
+body {
 	margin: 0;
-	font-size: 1.333em;
 }
+
+a,
+button,
+label,
+input {
+	-webkit-tap-highlight-color: transparent;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
 hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	box-sizing: content-box;
+	display: block;
+	height: 1px;
+	padding: 0;
+	overflow: visible;
+	border: 0;
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+
+small {
+	font-size: 80%;
+}
+
+sub,
+sup {
+	line-height: 1em;
+}
+
+img {
+	border-style: none;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+td,
+th {
+	font-weight: 400;
+	vertical-align: top;
+}
+
+button {
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: 0;
+	font: inherit;
+}
+
+input {
+	border: 0;
+	outline: none;
+	font: inherit;
+}
+
+textarea,
+select {
+	font: inherit;
+}
+
+/* ─── Design tokens ─── */
+:root {
+	/* Theme hues — rotate the palette by changing these two values */
+	--base-hue: 224;
+	--accent-hue: 62;
+
+	/* Primary palette — generated from --base-hue in OKLCH */
+	--clr-primary--darker: oklch(0.254 0.05 var(--base-hue));
+	--clr-primary: oklch(0.269 0.05 var(--base-hue));
+	--clr-primary--lighter: oklch(0.298 0.05 var(--base-hue));
+
+	/* Accent palette — generated from --accent-hue */
+	--clr-accent: oklch(0.75 0.157 var(--accent-hue));
+	--clr-accent-light: oklch(0.94 0.045 var(--accent-hue));
+	--clr-accent-dark: oklch(0.34 0.076 var(--accent-hue));
+
+	/* Semantic foreground tones */
+	--clr-secondary: oklch(0.65 0.12 calc(var(--accent-hue) + 120));
+	--clr-tertiary: oklch(0.65 0.1 calc(var(--accent-hue) + 240));
+	--clr-info: oklch(0.7 0.08 calc(var(--accent-hue) + 180));
+	--clr-subtle: oklch(0.55 0.04 var(--base-hue));
+
+	--clr-text: hsl(0 0% 87%);
+
+	/* Status colors — full brightness, named themes override */
+	--clr-error: oklch(0.63 0.25 29);
+	--clr-warning: oklch(0.75 0.15 85);
+	--clr-success: oklch(0.55 0.15 145);
+	--clr-critical: var(--clr-error);
+	--clr-overdue: oklch(0.58 0.2 35);
+
+	/* Grayscale */
+	--clr-gray-050: hsl(0, 0%, 87%);
+	--clr-gray-100: hsl(0, 0%, 67%);
+	--clr-gray-200: hsl(0, 0%, 60%);
+	--clr-gray-300: hsl(0, 0%, 53%);
+	--clr-gray-400: hsl(0, 0%, 47%);
+	--clr-gray-500: hsl(0, 0%, 40%);
+	--clr-gray-600: hsl(0, 0%, 33%);
+	--clr-gray-700: hsl(0, 0%, 27%);
+	--clr-gray-800: hsl(0, 0%, 20%);
+	--clr-gray-900: hsl(0, 0%, 13%);
+	--clr-gray-1000: hsl(0, 0%, 7%);
+
+	/* Transparent grays */
+	--clr-gray-trans-400: hsla(0 0% 100% / 0.5);
+	--clr-gray-trans-500: hsla(0 0% 100% / 0.5);
+	--clr-gray-trans-600: hsla(0 0% 100% / 0.2);
+	--clr-gray-trans-700: hsla(0 0% 50% / 0.5);
+	--clr-gray-trans-800: hsla(0 0% 50% / 0.3);
+	--clr-gray-trans-850: hsla(0 0% 50% / 0.2);
+	--clr-gray-trans-875: hsla(0 0% 50% / 0.1);
+	--clr-gray-trans-900: hsla(0 0% 15% / 0.95);
+
+	/* Theme-derived shadow highlights — adapt to current --clr-primary */
+	--clr-shadow-highlight-sm: oklch(from var(--clr-primary) calc(l + 0.2) calc(c * 0.5) h / 0.12);
+	--clr-shadow-highlight-md: oklch(from var(--clr-primary) calc(l + 0.2) calc(c * 0.5) h / 0.25);
+	--clr-shadow-highlight-lg: oklch(from var(--clr-primary) calc(l + 0.2) calc(c * 0.5) h / 0.35);
+
+	/* Transparent blacks for layered shadows */
+	--clr-black-trans-200: hsl(0 0% 5% / 0.2);
+	--clr-black-trans-400: hsl(0 0% 5% / 0.4);
+	--clr-black-trans-600: hsl(0 0% 5% / 0.6);
+	--clr-black-trans-800: hsl(0 0% 5% / 0.8);
+	--clr-black-trans-1000: hsl(0 0% 5% / 1);
+
+	/* Spacing scale (Utopia, fluid) */
+	--space-3xs: clamp(0.3125rem, 0.3125rem + 0vi, 0.3125rem);
+	--space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vi, 0.625rem);
+	--space-xs: clamp(0.875rem, 0.8533rem + 0.1087vi, 0.9375rem);
+	--space-s: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+	--space-m: clamp(1.6875rem, 1.6223rem + 0.3261vi, 1.875rem);
+	--space-l: clamp(2.25rem, 2.163rem + 0.4348vi, 2.5rem);
+	--space-xl: clamp(3.375rem, 3.2446rem + 0.6522vi, 3.75rem);
+	--space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vi, 5rem);
+	--space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
+
+	/* Spacing one-up pairs */
+	--space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vi, 0.625rem);
+	--space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vi, 0.9375rem);
+	--space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vi, 1.25rem);
+	--space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vi, 1.875rem);
+	--space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vi, 2.5rem);
+	--space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vi, 3.75rem);
+	--space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vi, 5rem);
+	--space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vi, 7.5rem);
+	--space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vi, 2.5rem);
+
+	/* Typography */
+	--ff-base: 'Ubuntu Mono', monospace;
+
+	--fs-200: clamp(0.75rem, 0.6522rem + 0.0435vi, 0.875rem);
+	--fs-300: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);
+	--fs-400: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+	--fs-500: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);
+	--fs-600: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);
+	--fs-700: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);
+	--fs-800: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);
+	--fs-900: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);
+	--fs-1000: clamp(3.3592rem, 2.8691rem + 2.4507vi, 4.7684rem);
+	--fs-1100: clamp(4.0311rem, 3.36rem + 3.3555vi, 5.9605rem);
+
+	/* 3D text shadows — must interpolate between layers of equal length */
+	--deep-3d-text-shadow:
+		1px 1px 0px var(--clr-gray-400), 2px 2px 0px var(--clr-gray-400),
+		3px 3px 0px var(--clr-gray-500), 4px 4px 0px var(--clr-gray-600),
+		5px 5px 0px var(--clr-gray-700), 6px 6px 0px var(--clr-gray-800),
+		7px 7px 0px var(--clr-gray-900);
+
+	--deep-3d-text-shadow-elongated:
+		1px 1px 0px var(--clr-gray-900), 2px 2px 0px var(--clr-gray-800),
+		3px 3px 0px var(--clr-gray-700), 4px 4px 0px var(--clr-gray-600),
+		5px 5px 0px var(--clr-gray-500), 6px 6px 0px var(--clr-gray-400),
+		7px 7px 0px var(--clr-gray-400);
+
+	--deep-3d-text-shadow-reversed:
+		1px -1px 0px var(--clr-gray-400), 2px -2px 0px var(--clr-gray-400),
+		3px -3px 0px var(--clr-gray-500), 4px -4px 0px var(--clr-gray-600),
+		5px -5px 0px var(--clr-gray-700), 6px -6px 0px var(--clr-gray-800),
+		7px -7px 0px var(--clr-gray-900);
+
+	--deep-3d-text-shadow-reversed-elongated:
+		1px -1px 0px var(--clr-gray-400), 2px -2px 0px var(--clr-gray-500),
+		3px -3px 0px var(--clr-gray-600), 4px -4px 0px var(--clr-gray-700),
+		5px -5px 0px var(--clr-gray-800), 6px -6px 0px var(--clr-gray-900),
+		7px -7px 0px var(--clr-gray-900);
+
+	--text-glow:
+		0 0 7px var(--clr-gray-trans-500), 0 0 15px var(--clr-accent);
+
+	/* Box shadow tokens */
+	--button-border-radius: 12px;
+
+	--deep-3d-box-shadow:
+		1px 1px 0px var(--clr-gray-200), 2px 2px 0px var(--clr-gray-300),
+		3px 3px 0px var(--clr-gray-400), 4px 4px 0px var(--clr-gray-500),
+		5px 5px 0px var(--clr-gray-600), 6px 6px 0px var(--clr-gray-700),
+		7px 7px 0px var(--clr-gray-800), 8px 8px 0px var(--clr-gray-900),
+		9px 9px 0px var(--clr-gray-1000), 28px 28px 30px var(--clr-black-trans-800),
+		20px 30px 35px var(--clr-black-trans-600), 30px 40px 40px var(--clr-black-trans-600);
+
+	/* Neumorphic floating-box system — resting/pressed states for cards & containers */
+	--floating-box:
+		0 -2px 2px var(--clr-black-trans-200), 0px 4px 4px var(--clr-black-trans-400),
+		0px 16px 16px var(--clr-black-trans-600), 16px 8px 16px var(--clr-black-trans-600),
+		inset 5px 5px 10px var(--clr-black-trans-200),
+		inset -10px -10px 10px var(--clr-black-trans-200),
+		inset -6px -6px 14px var(--clr-black-trans-600),
+		-4px -4px 10px var(--clr-shadow-highlight-md),
+		inset 6px 6px 10px var(--clr-shadow-highlight-md);
+
+	--floating-box-pressed:
+		inset 2px 2px 5px var(--clr-black-trans-800),
+		-2px -2px 5px var(--clr-black-trans-800),
+		inset 4px 4px 8px var(--clr-black-trans-800),
+		-8px -8px 12px var(--clr-black-trans-600),
+		inset 8px 8px 32px var(--clr-black-trans-400),
+		inset -2px -2px 5px var(--clr-shadow-highlight-sm),
+		2px 2px 5px var(--clr-shadow-highlight-md),
+		inset -4px -4px 8px var(--clr-shadow-highlight-md),
+		8px 8px 24px var(--clr-shadow-highlight-lg),
+		inset -8px -8px 32px var(--clr-shadow-highlight-md);
+
+	--bubble-box:
+		10px 10px 24px var(--clr-black-trans-800),
+		-4px -4px 12px var(--clr-shadow-highlight-lg),
+		inset 8px 8px 12px var(--clr-shadow-highlight-lg);
+
+	--bubble-box-pressed:
+		-8px -8px 20px var(--clr-black-trans-600),
+		4px 4px 12px var(--clr-shadow-highlight-lg),
+		inset 8px 8px 20px var(--clr-black-trans-1000),
+		inset -8px -8px 12px var(--clr-shadow-highlight-lg);
+
+	--box-shadow-highlighted: inset 0px 0px 10px 2px var(--clr-accent-light);
+
+	/* Neumorphic button shadows — transition between resting/hover requires equal layer count */
+	--neu-resting:
+		0 -2px 2px var(--clr-black-trans-200), 0px 4px 4px var(--clr-black-trans-400),
+		0px 16px 16px var(--clr-black-trans-600), 16px 8px 16px var(--clr-black-trans-600),
+		inset 5px 5px 10px var(--clr-black-trans-200),
+		inset -10px -10px 10px var(--clr-black-trans-200),
+		inset -6px -6px 14px var(--clr-black-trans-600),
+		-4px -4px 10px var(--clr-shadow-highlight-md), 0px 0px 0px transparent,
+		inset 6px 6px 10px var(--clr-shadow-highlight-md);
+
+	--neu-hover:
+		0 -3px 3px var(--clr-black-trans-200), 0px 7px 7px var(--clr-black-trans-400),
+		0px 18px 18px var(--clr-black-trans-600), 18px 10px 18px var(--clr-black-trans-600),
+		inset 0px 0px 0px transparent, inset 0px 0px 0px transparent,
+		inset -10px -10px 16px var(--clr-black-trans-600),
+		-5px -5px 12px var(--clr-shadow-highlight-lg), 0px 0px 0px transparent,
+		inset 10px 10px 16px var(--clr-shadow-highlight-lg);
+
+	--neu-pressed:
+		inset 2px 2px 5px var(--clr-black-trans-800),
+		-2px -2px 5px var(--clr-black-trans-800),
+		inset 4px 4px 8px var(--clr-black-trans-800),
+		-8px -8px 12px var(--clr-black-trans-600),
+		inset 8px 8px 32px var(--clr-black-trans-400),
+		inset -2px -2px 5px var(--clr-shadow-highlight-sm),
+		2px 2px 5px var(--clr-shadow-highlight-md),
+		inset -4px -4px 8px var(--clr-shadow-highlight-md),
+		8px 8px 24px var(--clr-shadow-highlight-lg),
+		inset -8px -8px 32px var(--clr-shadow-highlight-md);
+}
+
+/* ─── Color themes (rotate --base-hue only) ─── */
+[data-theme='blue'] {
+	--base-hue: 260;
+}
+[data-theme='green'] {
+	--base-hue: 155;
+}
+[data-theme='orange'] {
+	--base-hue: 62;
+}
+[data-theme='red'] {
+	--base-hue: 27;
+}
+[data-theme='purple'] {
+	--base-hue: 303;
+}
+[data-theme='yellow'] {
+	--base-hue: 104;
+}
+[data-theme='pink'] {
+	--base-hue: 350;
+}
+/* turquoise is :root default, no override */
+
+/* ─── Named themes (override full palette) ─── */
+[data-theme='charcoal-ember'] {
+	--clr-primary--darker: #1d1f21;
+	--clr-primary: #2d2d2d;
+	--clr-primary--lighter: #373b41;
+	--clr-text: #c5c8c6;
+	--clr-accent: #4eb6fe;
+	--clr-accent-light: #ffc400;
+	--clr-secondary: #b294bb;
+	--clr-tertiary: #b5bd68;
+	--clr-info: #8abeb7;
+	--clr-subtle: #969896;
+	--clr-error: #cc6666;
+	--clr-warning: #f0c674;
+	--clr-success: #b5bd68;
+}
+
+[data-theme='kanagawa'] {
+	--clr-primary--darker: #1f1f28;
+	--clr-primary: #16161d;
+	--clr-primary--lighter: #2a2a37;
+	--clr-text: #dcd7ba;
+	--clr-accent: #7e9cd8;
+	--clr-accent-light: #e6c384;
+	--clr-secondary: #957fb8;
+	--clr-tertiary: #98bb6c;
+	--clr-info: #7aa89f;
+	--clr-subtle: #727169;
+	--clr-error: #c34043;
+	--clr-warning: #ff9e64;
+	--clr-success: #76946a;
+}
+
+[data-theme='rose-pine'] {
+	--clr-primary--darker: #191724;
+	--clr-primary: #1f1d2e;
+	--clr-primary--lighter: #26233a;
+	--clr-text: #e0def4;
+	--clr-accent: #c4a7e7;
+	--clr-accent-light: #ebbcba;
+	--clr-secondary: #eb6f92;
+	--clr-tertiary: #9ccfd8;
+	--clr-info: #31748f;
+	--clr-subtle: #6e6a86;
+	--clr-error: #eb6f92;
+	--clr-warning: #f6c177;
+	--clr-success: #9ccfd8;
+}
+
+[data-theme='gruvbox'] {
+	--clr-primary--darker: #1d2021;
+	--clr-primary: #282828;
+	--clr-primary--lighter: #3c3836;
+	--clr-text: #ebdbb2;
+	--clr-accent: #83a598;
+	--clr-accent-light: #fabd2f;
+	--clr-secondary: #d3869b;
+	--clr-tertiary: #b8bb26;
+	--clr-info: #8ec07c;
+	--clr-subtle: #928374;
+	--clr-error: #fb4934;
+	--clr-warning: #fabd2f;
+	--clr-success: #b8bb26;
+}
+
+[data-theme='nord'] {
+	--clr-primary--darker: #242933;
+	--clr-primary: #191d24;
+	--clr-primary--lighter: #2e3440;
+	--clr-text: #bbc3d4;
+	--clr-accent: #88c0d0;
+	--clr-accent-light: #ebcb8b;
+	--clr-secondary: #b48ead;
+	--clr-tertiary: #a3be8c;
+	--clr-info: #8fbcbb;
+	--clr-subtle: #616e88;
+	--clr-error: #bf616a;
+	--clr-warning: #ebcb8b;
+	--clr-success: #a3be8c;
+}
+
+[data-theme='nightfox'] {
+	--clr-primary--darker: #192330;
+	--clr-primary: #131a24;
+	--clr-primary--lighter: #212e3f;
+	--clr-text: #cdcecf;
+	--clr-accent: #719cd6;
+	--clr-accent-light: #dbc074;
+	--clr-secondary: #c397d8;
+	--clr-tertiary: #81b29a;
+	--clr-info: #63cdcf;
+	--clr-subtle: #738091;
+	--clr-error: #c94f6d;
+	--clr-warning: #dbc074;
+	--clr-success: #81b29a;
+}
+
+[data-theme='everforest'] {
+	--clr-primary--darker: #1e2326;
+	--clr-primary: #272e33;
+	--clr-primary--lighter: #2e383c;
+	--clr-text: #d3c6aa;
+	--clr-accent: #a7c080;
+	--clr-accent-light: #dbbc7f;
+	--clr-secondary: #d699b6;
+	--clr-tertiary: #7fbbb3;
+	--clr-info: #83c092;
+	--clr-subtle: #859289;
+	--clr-error: #e67e80;
+	--clr-warning: #dbbc7f;
+	--clr-success: #a7c080;
+}
+
+[data-theme='solarized-osaka'] {
+	--clr-primary--darker: #001419;
+	--clr-primary: #001419;
+	--clr-primary--lighter: #002b36;
+	--clr-text: #93a1a1;
+	--clr-accent: #268bd2;
+	--clr-accent-light: #b58900;
+	--clr-secondary: #d33682;
+	--clr-tertiary: #859900;
+	--clr-info: #2aa198;
+	--clr-subtle: #657b83;
+	--clr-error: #dc322f;
+	--clr-warning: #b58900;
+	--clr-success: #859900;
+}
+
+[data-theme='terafox'] {
+	--clr-primary--darker: #152528;
+	--clr-primary: #0f1c1e;
+	--clr-primary--lighter: #1d3337;
+	--clr-text: #e6eaea;
+	--clr-accent: #5a93aa;
+	--clr-accent-light: #ead49b;
+	--clr-secondary: #ad5c7c;
+	--clr-tertiary: #7aa4a1;
+	--clr-info: #a1cdd8;
+	--clr-subtle: #6d7f8b;
+	--clr-error: #e85c51;
+	--clr-warning: #fda47f;
+	--clr-success: #7aa4a1;
+}
+
+[data-theme='oceanic-next'] {
+	--clr-primary--darker: #162c35;
+	--clr-primary: #1b2b34;
+	--clr-primary--lighter: #343d46;
+	--clr-text: #c0c5ce;
+	--clr-accent: #6699cc;
+	--clr-accent-light: #fac863;
+	--clr-secondary: #c594c5;
+	--clr-tertiary: #99c794;
+	--clr-info: #5fb3b3;
+	--clr-subtle: #65737e;
+	--clr-error: #ec5f67;
+	--clr-warning: #fac863;
+	--clr-success: #99c794;
+}
+
+[data-theme='flexoki'] {
+	--clr-primary--darker: #100f0f;
+	--clr-primary: #1c1b1a;
+	--clr-primary--lighter: #282726;
+	--clr-text: #cecdc3;
+	--clr-accent: #3aa99f;
+	--clr-accent-light: #d0a215;
+	--clr-secondary: #ce5d97;
+	--clr-tertiary: #879a39;
+	--clr-info: #4385be;
+	--clr-subtle: #878580;
+	--clr-error: #d14d41;
+	--clr-warning: #d0a215;
+	--clr-success: #879a39;
+}
+
+[data-theme='retrobox'] {
+	--clr-primary--darker: #1c1c1c;
+	--clr-primary: #282828;
+	--clr-primary--lighter: #3c3836;
+	--clr-text: #ebdbb2;
+	--clr-accent: #83a598;
+	--clr-accent-light: #fabd2f;
+	--clr-secondary: #d3869b;
+	--clr-tertiary: #b8bb26;
+	--clr-info: #8ec07c;
+	--clr-subtle: #928374;
+	--clr-error: #fb4934;
+	--clr-warning: #fabd2f;
+	--clr-success: #b8bb26;
+}
+
+/* ─── Selectable fonts ─── */
+[data-font='ubuntu-mono'] {
+	--ff-base: 'Ubuntu Mono', monospace;
+}
+[data-font='fira-code'] {
+	--ff-base: 'Fira Code', monospace;
+}
+[data-font='jetbrains-mono'] {
+	--ff-base: 'JetBrains Mono', monospace;
+}
+[data-font='roboto-mono'] {
+	--ff-base: 'Roboto Mono', monospace;
+}
+[data-font='inter'] {
+	--ff-base: 'Inter', sans-serif;
+}
+[data-font='space-grotesk'] {
+	--ff-base: 'Space Grotesk', sans-serif;
+}
+[data-font='hack'] {
+	--ff-base: 'Hack', monospace;
+}
+[data-font='commit-mono'] {
+	--ff-base: 'CommitMono', monospace;
+}
+[data-font='comic-mono'] {
+	--ff-base: 'Comic Mono', monospace;
+}
+[data-font='iosevka'] {
+	--ff-base: 'Iosevka', monospace;
+}
+[data-font='meslo'] {
+	--ff-base: 'Meslo LG M', monospace;
+}
+[data-font='monaspace-neon'] {
+	--ff-base: 'Monaspace Neon', monospace;
+}
+[data-font='serious-shanns'] {
+	--ff-base: 'Serious Shanns', monospace;
+}
+[data-font='comic-shanns'] {
+	--ff-base: 'Comic Shanns', monospace;
+}
+
+/* ─── Base elements ─── */
+html {
+	height: 100%;
+	background-color: var(--clr-primary--darker);
+}
+
+body {
+	min-height: 100%;
+	background-color: var(--clr-primary--darker);
+	color: var(--clr-text);
+	font-family: var(--ff-base);
+	font-weight: 300;
+	line-height: 1.5em;
+}
+
+h1 {
+	font-size: var(--fs-900);
+}
+
+h2 {
+	font-size: var(--fs-700);
+}
+
+h3 {
+	font-size: var(--fs-600);
+}
+
+h4 {
+	font-size: var(--fs-500);
+}
+
+h5 {
+	font-size: var(--fs-400);
+}
+
+main {
+	width: min(100%, 70rem);
+	margin: 0 auto;
+	padding: var(--space-l) var(--space-m);
+}
+
+.centered {
+	text-align: center;
 }
 
 .sr-only {
@@ -130,12 +731,8 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }

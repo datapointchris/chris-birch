@@ -1,0 +1,312 @@
+---
+import { themes, fonts } from '../scripts/preferences';
+---
+
+<div class="prefs" data-open="false">
+	<button class="prefs__toggle" aria-label="Open theme settings" aria-expanded="false">
+		<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+			<path
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path>
+			<path
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"
+			></path>
+		</svg>
+	</button>
+
+	<div class="prefs__panel" role="dialog" aria-label="Theme settings">
+		<div class="prefs__columns">
+			<section class="prefs__column">
+				<h3 class="prefs__heading">Theme</h3>
+				<span class="prefs__subheading">Colors</span>
+				<div class="prefs__themes prefs__themes--colors">
+					{
+						themes
+							.filter((t) => t.type === 'color')
+							.map((t) => (
+								<button
+									type="button"
+									class="prefs__theme"
+									data-theme-id={t.id}
+									style={`background: ${t.swatch};`}
+								>
+									<span class="prefs__theme-name">{t.name}</span>
+								</button>
+							))
+					}
+				</div>
+
+				<span class="prefs__subheading">Named</span>
+				<div class="prefs__themes prefs__themes--named">
+					{
+						themes
+							.filter((t) => t.type === 'named')
+							.map((t) => (
+								<button
+									type="button"
+									class="prefs__theme"
+									data-theme-id={t.id}
+									style={`background: ${t.swatch};`}
+								>
+									<span class="prefs__theme-name">{t.name}</span>
+								</button>
+							))
+					}
+				</div>
+			</section>
+
+			<section class="prefs__column">
+				<h3 class="prefs__heading">Font</h3>
+				<div class="prefs__fonts">
+					{
+						fonts.map((f) => (
+							<button
+								type="button"
+								class="prefs__font"
+								data-font-id={f.id}
+								style={`font-family: ${f.family};`}
+							>
+								{f.name}
+							</button>
+						))
+					}
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { setTheme, setFont, getStoredTheme, getStoredFont } from '../scripts/preferences';
+
+	const picker = document.querySelector<HTMLElement>('.prefs');
+	const toggle = picker?.querySelector<HTMLElement>('.prefs__toggle');
+
+	function setOpen(open: boolean) {
+		if (!picker) return;
+		picker.setAttribute('data-open', String(open));
+		toggle?.setAttribute('aria-expanded', String(open));
+	}
+
+	toggle?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		const isOpen = picker?.getAttribute('data-open') === 'true';
+		setOpen(!isOpen);
+	});
+
+	document.addEventListener('click', (e) => {
+		if (!picker || picker.contains(e.target as Node)) return;
+		setOpen(false);
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') setOpen(false);
+	});
+
+	function highlightSelected() {
+		const themeId = getStoredTheme();
+		const fontId = getStoredFont();
+		picker?.querySelectorAll<HTMLElement>('[data-theme-id]').forEach((el) => {
+			el.classList.toggle('prefs__theme--selected', el.dataset.themeId === themeId);
+		});
+		picker?.querySelectorAll<HTMLElement>('[data-font-id]').forEach((el) => {
+			el.classList.toggle('prefs__font--selected', el.dataset.fontId === fontId);
+		});
+	}
+
+	picker?.querySelectorAll<HTMLElement>('[data-theme-id]').forEach((el) => {
+		el.addEventListener('click', () => {
+			const id = el.dataset.themeId;
+			if (!id) return;
+			setTheme(id);
+			highlightSelected();
+		});
+	});
+
+	picker?.querySelectorAll<HTMLElement>('[data-font-id]').forEach((el) => {
+		el.addEventListener('click', () => {
+			const id = el.dataset.fontId;
+			if (!id) return;
+			setFont(id);
+			highlightSelected();
+		});
+	});
+
+	highlightSelected();
+</script>
+
+<style>
+	.prefs {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.prefs__toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		color: var(--clr-text);
+		border-radius: var(--button-border-radius);
+		background-color: var(--clr-primary);
+		box-shadow: var(--floating-box);
+		cursor: pointer;
+		transition:
+			transform 0.1s ease,
+			color 0.1s ease;
+	}
+
+	.prefs__toggle:hover {
+		color: var(--clr-accent-light);
+		transform: scale(1.05);
+	}
+
+	.prefs[data-open='true'] .prefs__toggle {
+		color: var(--clr-accent);
+		box-shadow: var(--floating-box-pressed);
+	}
+
+	.prefs__panel {
+		position: absolute;
+		top: calc(100% + var(--space-xs));
+		right: 0;
+		z-index: 100;
+		width: 32rem;
+		max-width: 90vw;
+		padding: var(--space-m);
+		background-color: var(--clr-primary);
+		border-radius: var(--button-border-radius);
+		box-shadow: var(--bubble-box);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-0.5rem) scale(0.98);
+		transition:
+			opacity 0.15s ease,
+			transform 0.15s ease,
+			visibility 0.15s;
+	}
+
+	.prefs[data-open='true'] .prefs__panel {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0) scale(1);
+	}
+
+	.prefs__columns {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-m);
+	}
+
+	.prefs__column {
+		min-width: 0;
+	}
+
+	.prefs__heading {
+		margin: 0 0 var(--space-xs) 0;
+		color: var(--clr-accent-light);
+		font-size: var(--fs-300);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.prefs__subheading {
+		display: block;
+		margin-top: var(--space-xs);
+		margin-bottom: var(--space-3xs);
+		color: var(--clr-subtle);
+		font-size: var(--fs-200);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.prefs__themes--colors {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-3xs);
+	}
+
+	.prefs__themes--named,
+	.prefs__fonts {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3xs);
+	}
+
+	.prefs__theme {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.25rem;
+		padding: var(--space-3xs) var(--space-xs);
+		border-radius: calc(var(--button-border-radius) * 0.5);
+		box-shadow: var(--floating-box);
+		cursor: pointer;
+		transition:
+			transform 0.1s ease,
+			box-shadow 0.1s ease;
+	}
+
+	.prefs__theme:hover {
+		transform: scale(1.04);
+	}
+
+	.prefs__theme--selected {
+		box-shadow: var(--box-shadow-highlighted), var(--floating-box-pressed);
+	}
+
+	.prefs__theme-name {
+		min-width: 0;
+		color: var(--clr-gray-100);
+		font-size: var(--fs-300);
+		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+	}
+
+	.prefs__font {
+		padding: var(--space-2xs) var(--space-s);
+		color: var(--clr-text);
+		text-align: left;
+		border-radius: calc(var(--button-border-radius) * 0.5);
+		background-color: var(--clr-primary--lighter);
+		cursor: pointer;
+		transition:
+			background-color 0.1s ease,
+			color 0.1s ease;
+	}
+
+	.prefs__font:hover {
+		color: var(--clr-accent-light);
+		background-color: var(--clr-primary--darker);
+	}
+
+	.prefs__font--selected {
+		color: var(--clr-accent);
+		box-shadow: inset 0 0 0 1px var(--clr-accent);
+	}
+
+	@media screen and (max-width: 600px) {
+		.prefs__panel {
+			width: 22rem;
+			max-height: calc(100vh - 6rem);
+			overflow-y: auto;
+		}
+		.prefs__columns {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

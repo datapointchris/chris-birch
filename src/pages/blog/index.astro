@@ -16,99 +16,137 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
+			<h1 class="page-title">Writing</h1>
+			<ul class="post-list">
+				{
+					posts.map((post) => (
+						<li class="post-row">
+							<a class="post-row__link" href={`/blog/${post.id}/`}>
+								{post.data.heroImage && (
+									<Image
+										class="post-row__image"
+										width={120}
+										height={120}
+										src={post.data.heroImage}
+										alt=""
+									/>
+								)}
+								<div class="post-row__content">
+									<h2 class="post-row__title">{post.data.title}</h2>
+									<p class="post-row__date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+								</div>
+							</a>
+						</li>
+					))
+				}
+			</ul>
 		</main>
 		<Footer />
+
+		<style>
+			.page-title {
+				margin: 0 0 var(--space-l) 0;
+				font-size: var(--fs-800);
+				color: var(--clr-accent-light);
+				text-shadow: var(--deep-3d-text-shadow);
+			}
+
+			.post-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: var(--space-s);
+			}
+
+			.post-row {
+				position: relative;
+				isolation: isolate;
+				background-color: var(--clr-primary);
+				border-radius: var(--button-border-radius);
+				box-shadow: var(--floating-box);
+				transition: transform 0.45s ease-out;
+			}
+
+			.post-row::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border-radius: inherit;
+				box-shadow: var(--bubble-box);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.45s ease-out;
+			}
+
+			.post-row:hover {
+				transform: scale(1.01) translateY(calc(var(--space-3xs) * -0.4));
+			}
+
+			.post-row:hover::before {
+				opacity: 1;
+			}
+
+			.post-row__link {
+				position: relative;
+				z-index: 1;
+				display: flex;
+				align-items: center;
+				gap: var(--space-m);
+				padding: var(--space-s) var(--space-m);
+				color: inherit;
+				text-decoration: none;
+			}
+
+			.post-row__image {
+				flex: 0 0 auto;
+				width: 7.5rem;
+				height: 7.5rem;
+				object-fit: cover;
+				border-radius: calc(var(--button-border-radius) * 0.75);
+			}
+
+			.post-row__content {
+				flex: 1 1 auto;
+				min-width: 0;
+			}
+
+			.post-row__title {
+				margin: 0 0 var(--space-3xs) 0;
+				font-size: var(--fs-500);
+				font-weight: 700;
+				color: var(--clr-accent-light);
+				text-shadow: var(--deep-3d-text-shadow);
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.post-row__date {
+				margin: 0;
+				font-size: var(--fs-300);
+				color: var(--clr-subtle);
+			}
+
+			@media screen and (max-width: 600px) {
+				.post-row__link {
+					gap: var(--space-s);
+					padding: var(--space-xs) var(--space-s);
+				}
+				.post-row__image {
+					width: 4rem;
+					height: 4rem;
+				}
+				.post-row__title {
+					font-size: var(--fs-400);
+				}
+			}
+		</style>
 	</body>
 </html>

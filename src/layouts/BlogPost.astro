@@ -14,73 +14,200 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
 		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+			<article class="post">
+				{
+					heroImage && (
+						<div class="post__hero">
+							<Image width={1020} height={510} src={heroImage} alt="" />
 						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
+					)
+				}
+				<header class="post__header">
+					<h1 class="post__title">{title}</h1>
+					<p class="post__meta">
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<span class="post__meta--updated">
+									{' · updated '}
+									<FormattedDate date={updatedDate} />
+								</span>
+							)
+						}
+					</p>
+					<hr class="post__divider" />
+				</header>
+				<div class="post__content">
 					<slot />
 				</div>
 			</article>
 		</main>
 		<Footer />
+
+		<style>
+			.post {
+				width: min(100%, 50rem);
+				margin: 0 auto;
+			}
+
+			.post__hero {
+				margin-bottom: var(--space-l);
+			}
+
+			.post__hero img {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-radius: var(--button-border-radius);
+				box-shadow: var(--floating-box);
+			}
+
+			.post__title {
+				margin: 0 0 var(--space-s) 0;
+				font-size: var(--fs-900);
+				font-weight: 700;
+				line-height: 1.1;
+				color: var(--clr-accent-light);
+				text-shadow: var(--deep-3d-text-shadow);
+			}
+
+			.post__meta {
+				margin: 0;
+				color: var(--clr-subtle);
+				font-size: var(--fs-300);
+			}
+
+			.post__meta--updated {
+				font-style: italic;
+			}
+
+			.post__divider {
+				margin: var(--space-m) 0;
+				border: none;
+				border-top: 1px solid var(--clr-primary--lighter);
+			}
+
+			.post__content {
+				font-size: var(--fs-400);
+				line-height: 1.7;
+				color: var(--clr-text);
+			}
+
+			.post__content :global(h2) {
+				margin: var(--space-l) 0 var(--space-s) 0;
+				font-size: var(--fs-700);
+				color: var(--clr-accent-light);
+				text-shadow: var(--deep-3d-text-shadow);
+			}
+
+			.post__content :global(h3) {
+				margin: var(--space-m) 0 var(--space-xs) 0;
+				font-size: var(--fs-600);
+				color: var(--clr-accent-light);
+			}
+
+			.post__content :global(h4) {
+				margin: var(--space-m) 0 var(--space-xs) 0;
+				font-size: var(--fs-500);
+				color: var(--clr-accent-light);
+			}
+
+			.post__content :global(p) {
+				margin: 0 0 var(--space-s) 0;
+			}
+
+			.post__content :global(a) {
+				color: var(--clr-accent);
+				text-decoration: underline;
+				text-underline-offset: 0.2em;
+				transition: color 0.15s ease;
+			}
+
+			.post__content :global(a:hover) {
+				color: var(--clr-accent-light);
+			}
+
+			.post__content :global(code) {
+				padding: 0.15em 0.4em;
+				background-color: var(--clr-primary--lighter);
+				border-radius: 4px;
+				font-size: 0.9em;
+			}
+
+			.post__content :global(pre) {
+				margin: var(--space-s) 0;
+				padding: var(--space-s);
+				background-color: var(--clr-primary--darker);
+				border-radius: var(--button-border-radius);
+				box-shadow: var(--floating-box);
+				overflow-x: auto;
+				font-size: var(--fs-300);
+			}
+
+			.post__content :global(pre code) {
+				padding: 0;
+				background: transparent;
+			}
+
+			.post__content :global(blockquote) {
+				margin: var(--space-s) 0;
+				padding: var(--space-xs) var(--space-m);
+				border-left: 3px solid var(--clr-accent);
+				background-color: var(--clr-primary--darker);
+				border-radius: 0 calc(var(--button-border-radius) * 0.5) calc(var(--button-border-radius) * 0.5) 0;
+				color: var(--clr-text);
+			}
+
+			.post__content :global(blockquote p:last-child) {
+				margin-bottom: 0;
+			}
+
+			.post__content :global(ul),
+			.post__content :global(ol) {
+				margin: 0 0 var(--space-s) 0;
+				padding-left: var(--space-m);
+			}
+
+			.post__content :global(li) {
+				margin-bottom: var(--space-3xs);
+			}
+
+			.post__content :global(img) {
+				max-width: 100%;
+				height: auto;
+				margin: var(--space-s) 0;
+				border-radius: var(--button-border-radius);
+				box-shadow: var(--floating-box);
+			}
+
+			.post__content :global(hr) {
+				margin: var(--space-l) 0;
+				border: none;
+				border-top: 1px solid var(--clr-primary--lighter);
+			}
+
+			.post__content :global(table) {
+				width: 100%;
+				margin: var(--space-s) 0;
+				border-collapse: collapse;
+			}
+
+			.post__content :global(th),
+			.post__content :global(td) {
+				padding: var(--space-2xs) var(--space-xs);
+				border-bottom: 1px solid var(--clr-primary--lighter);
+				text-align: left;
+			}
+
+			.post__content :global(th) {
+				color: var(--clr-accent-light);
+				border-bottom: 2px solid var(--clr-accent);
+			}
+		</style>
 	</body>
 </html>
