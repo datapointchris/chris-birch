@@ -1,0 +1,4 @@
+# Blog posts are published content validated by Astro content collections,
+# not repo docs — doc-oriented markdown rules (single-h1, first-line-heading)
+# conflict with frontmatter + post structure.
+src/content/
