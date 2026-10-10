@@ -1,4 +1,4 @@
 [codespell]
-# Skip the generated lockfile (package names like "devlop" are not typos)
+# Skip the generated lockfile (a package name that reads as a misspelling is not a typo)
 # and Astro starter-template boilerplate still carrying Lorem-ipsum Latin.
 skip = package-lock.json,*/content/*,*/about.astro
