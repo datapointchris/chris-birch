@@ -6,7 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
+  validate:
+    uses: ./.github/workflows/validate.yml
+
   build:
+    needs: validate
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
