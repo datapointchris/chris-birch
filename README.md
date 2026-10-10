@@ -2,7 +2,7 @@
 
 Personal blog. Astro static site with a custom design system ported from
 ichrisbirch — neumorphic shadow vocabulary, OKLCH-derived color scales,
-14 named themes, 14 selectable fonts, runtime theme + font picker.
+named and hue-rotated color themes, selectable fonts, runtime theme + font picker.
 
 ## Stack
 
