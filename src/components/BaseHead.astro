@@ -25,8 +25,6 @@ const { title, description, image = FallbackImage } = Astro.props;
 			if (theme) document.documentElement.setAttribute('data-theme', theme);
 			var font = localStorage.getItem('chris-birch:font');
 			if (font) document.documentElement.setAttribute('data-font', font);
-			var hue = localStorage.getItem('chris-birch:accent-hue');
-			if (hue) document.documentElement.style.setProperty('--accent-hue', hue);
 		} catch (_) {
 			/* localStorage disabled — fall back to default theme */
 		}

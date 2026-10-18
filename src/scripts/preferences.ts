@@ -20,7 +20,6 @@ export interface FontDefinition {
 
 export const STORAGE_KEY_THEME = 'chris-birch:theme';
 export const STORAGE_KEY_FONT = 'chris-birch:font';
-export const STORAGE_KEY_ACCENT_HUE = 'chris-birch:accent-hue';
 
 export const themes: ThemeDefinition[] = [
 	{ id: 'turquoise', name: 'Turquoise', type: 'color', swatch: '#00363f' },
@@ -169,10 +168,6 @@ export function applyFont(fontId: string) {
 	document.documentElement.setAttribute('data-font', fontId);
 }
 
-export function applyAccentHue(hue: number) {
-	document.documentElement.style.setProperty('--accent-hue', String(hue));
-}
-
 export function setTheme(themeId: string) {
 	localStorage.setItem(STORAGE_KEY_THEME, themeId);
 	applyTheme(themeId);
@@ -183,24 +178,12 @@ export function setFont(fontId: string) {
 	applyFont(fontId);
 }
 
-export function setAccentHue(hue: number) {
-	localStorage.setItem(STORAGE_KEY_ACCENT_HUE, String(hue));
-	applyAccentHue(hue);
-}
-
 export function getStoredTheme(): string | null {
 	return localStorage.getItem(STORAGE_KEY_THEME);
 }
 
 export function getStoredFont(): string | null {
 	return localStorage.getItem(STORAGE_KEY_FONT);
-}
-
-export function getStoredAccentHue(): number | null {
-	const v = localStorage.getItem(STORAGE_KEY_ACCENT_HUE);
-	if (v === null) return null;
-	const n = Number(v);
-	return Number.isFinite(n) ? n : null;
 }
 
 /* Loads any Google Font that the inline init script set as the
@@ -220,9 +203,5 @@ export function initPreferencesInteractive() {
 	window.addEventListener('storage', (e) => {
 		if (e.key === STORAGE_KEY_THEME && e.newValue) applyTheme(e.newValue);
 		if (e.key === STORAGE_KEY_FONT && e.newValue) applyFont(e.newValue);
-		if (e.key === STORAGE_KEY_ACCENT_HUE && e.newValue) {
-			const n = Number(e.newValue);
-			if (Number.isFinite(n)) applyAccentHue(n);
-		}
 	});
 }
