@@ -340,6 +340,9 @@ select {
 	--text-glow:
 		0 0 7px var(--clr-gray-trans-500), 0 0 15px var(--clr-accent);
 
+	/* Keeps light text readable over a solid swatch of any color */
+	--legible-text-shadow: 0 1px 2px var(--clr-black-trans-600);
+
 	/* Box shadow tokens */
 	--button-border-radius: 12px;
 
