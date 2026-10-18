@@ -1,8 +1,7 @@
-/* Theme + font preferences, ported from
- * ~/webapps/ichrisbirch/frontend/src/composables/useTheme.ts
- * Vue reactivity replaced with localStorage; theme/font data lives in
- * global.css as [data-theme="..."] / [data-font="..."] rules so apply
- * is a single attribute toggle (FOUC-free via inline init script). */
+/* Theme and font preferences. Each theme and font is a [data-theme] or
+ * [data-font] rule in global.css, so applying one sets an attribute on
+ * <html>. The choice is stored in localStorage. The inline script in
+ * BaseHead.astro applies the stored choice before first paint. */
 
 export interface ThemeDefinition {
 	id: string;
