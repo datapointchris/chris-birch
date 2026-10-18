@@ -62,11 +62,10 @@ inlined in one component stops following it.
 
 **A shadow transition needs both lists to agree on `inset`, position by
 position.** Where they differ, the CSS Backgrounds and Borders spec
-swaps the shadow at once instead of animating it. The `--neu-*` tokens
-carry transparent placeholder layers to keep their positions aligned.
-`--floating-box` and `--bubble-box` do not align. So the post-row hover
-on the blog index fades in a `::before` holding `--bubble-box` rather
-than transitioning `box-shadow`.
+swaps the shadow at once instead of animating it. `--floating-box` and
+`--bubble-box` do not align. So the post-row hover on the blog index
+fades in a `::before` holding `--bubble-box` rather than transitioning
+`box-shadow`.
 
 ## Posts are Markdown in git
 

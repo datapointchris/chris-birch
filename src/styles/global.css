@@ -388,36 +388,6 @@ select {
 		inset -8px -8px 12px var(--clr-shadow-highlight-lg);
 
 	--box-shadow-highlighted: inset 0px 0px 10px 2px var(--clr-accent-light);
-
-	/* Neumorphic button shadows — transition between resting/hover requires equal layer count */
-	--neu-resting:
-		0 -2px 2px var(--clr-black-trans-200), 0px 4px 4px var(--clr-black-trans-400),
-		0px 16px 16px var(--clr-black-trans-600), 16px 8px 16px var(--clr-black-trans-600),
-		inset 5px 5px 10px var(--clr-black-trans-200),
-		inset -10px -10px 10px var(--clr-black-trans-200),
-		inset -6px -6px 14px var(--clr-black-trans-600),
-		-4px -4px 10px var(--clr-shadow-highlight-md), 0px 0px 0px transparent,
-		inset 6px 6px 10px var(--clr-shadow-highlight-md);
-
-	--neu-hover:
-		0 -3px 3px var(--clr-black-trans-200), 0px 7px 7px var(--clr-black-trans-400),
-		0px 18px 18px var(--clr-black-trans-600), 18px 10px 18px var(--clr-black-trans-600),
-		inset 0px 0px 0px transparent, inset 0px 0px 0px transparent,
-		inset -10px -10px 16px var(--clr-black-trans-600),
-		-5px -5px 12px var(--clr-shadow-highlight-lg), 0px 0px 0px transparent,
-		inset 10px 10px 16px var(--clr-shadow-highlight-lg);
-
-	--neu-pressed:
-		inset 2px 2px 5px var(--clr-black-trans-800),
-		-2px -2px 5px var(--clr-black-trans-800),
-		inset 4px 4px 8px var(--clr-black-trans-800),
-		-8px -8px 12px var(--clr-black-trans-600),
-		inset 8px 8px 32px var(--clr-black-trans-400),
-		inset -2px -2px 5px var(--clr-shadow-highlight-sm),
-		2px 2px 5px var(--clr-shadow-highlight-md),
-		inset -4px -4px 8px var(--clr-shadow-highlight-md),
-		8px 8px 24px var(--clr-shadow-highlight-lg),
-		inset -8px -8px 32px var(--clr-shadow-highlight-md);
 }
 
 /* ─── Color themes (rotate --base-hue only) ─── */

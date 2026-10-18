@@ -129,16 +129,12 @@ token or choose another.
 
 The shadows are neumorphic. `--floating-box` and `--bubble-box` shape
 cards and containers. Each has a `-pressed` variant.
-`--neu-resting`, `--neu-hover` and `--neu-pressed` are a button's three
-states.
 
 **A shadow transition needs both lists to agree on `inset`, position by
 position.** Where they differ, the browser swaps the shadow at once
-instead of animating it. `--neu-resting` and `--neu-hover` carry
-transparent placeholder layers to keep their positions aligned.
-`--floating-box` and `--bubble-box` do not align. So the post-row hover
-on the blog index fades in a `::before` holding `--bubble-box` rather
-than transitioning `box-shadow`.
+instead of animating it. `--floating-box` and `--bubble-box` do not
+align. So the post-row hover on the blog index fades in a `::before`
+holding `--bubble-box` rather than transitioning `box-shadow`.
 
 ## Checks — the build is the one gate on the code
 
