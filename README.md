@@ -122,10 +122,10 @@ change together with the strings in that script.
 `src/styles/global.css` defines colors, spacing, the type scale and
 shadows as custom properties on `:root`. The theme rules, the
 `@font-face` declarations and the base element styles sit beside
-them. A component uses a token,
-never an inline color or shadow. The OKLCH-derived tokens follow the
-active theme. A value copied into one component stops following it.
-Where a token looks wrong, change the token or choose another.
+them. A component uses a token, never an inline color or shadow. The
+OKLCH-derived tokens follow the active theme. A value copied into one
+component stops following it. Where a token looks wrong, change the
+token or choose another.
 
 The shadows are neumorphic. `--floating-box` and `--bubble-box` shape
 cards and containers. Each has a `-pressed` variant.
@@ -160,8 +160,8 @@ editor.
 
 A push to `main` runs `.github/workflows/deploy.yml`. Its first job
 calls `validate.yml`. The build job `needs:` that job. A push that
-fails a hook builds nothing. The build job runs `npm ci` and `npm run build`,
-then uploads `dist/` as an artifact named `dist`.
+fails a hook builds nothing. The build job runs `npm ci` and
+`npm run build`, then uploads `dist/` as an artifact named `dist`.
 
 Nothing in this repository copies `dist/` onto a server. `dist/` is
 plain static files. Any web server can serve it.
