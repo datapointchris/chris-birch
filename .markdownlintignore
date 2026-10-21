@@ -3,7 +3,6 @@
 # conflict with frontmatter + post structure.
 src/content/
 
-# Preventive: no release here writes a changelog. The entry stands so that one
-# arriving generated is never linted, since normalization of a generated file
-# is undone on the next release and returns as a conflict.
+# No release here writes a CHANGELOG.md yet. A generated one is rewritten on
+# every release, so a lint fix to it is undone and returns as a conflict.
 CHANGELOG.md

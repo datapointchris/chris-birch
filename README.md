@@ -64,8 +64,7 @@ images, and prose styles applied through Astro's `:global()`.
   `.markdownlintignore` skips `src/content/`, because doc-oriented rules
   such as a single top-level heading conflict with frontmatter.
   `.codespellrc` skips it too.
-- **Code blocks use Shiki's `github-dark` under every theme.** The
-  highlighting does not follow the picker.
+- **Code blocks use Shiki's `github-dark` under every theme.**
 - **Nothing renders diagrams.** A `mermaid` fence is shown as
   highlighted source.
 - **`site` in `astro.config.mjs` is the canonical origin.** Every page's

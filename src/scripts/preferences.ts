@@ -1,7 +1,9 @@
 /* Theme and font preferences. Each theme and font is a [data-theme] or
  * [data-font] rule in global.css, so applying one sets an attribute on
- * <html>. The choice is stored in localStorage. The inline script in
- * BaseHead.astro applies the stored choice before first paint. */
+ * <html>. The is:inline script in BaseHead.astro applies the stored
+ * choice before first paint. It cannot import, so it spells the
+ * localStorage keys itself, and a change to STORAGE_KEY_* is made there
+ * too. */
 
 export interface ThemeDefinition {
 	id: string;

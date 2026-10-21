@@ -84,8 +84,9 @@ extension.
 - **Nothing renders diagrams.** A `mermaid` fence is shown as
   highlighted source.
 - **`site` in `astro.config.mjs` is the canonical origin.** Copies of a
-  post syndicated to other sites carry a `canonical_url` pointing here,
-  so the canonical link `BaseHead.astro` emits is load-bearing.
+  post syndicated to other sites carry a `canonical_url` pointing here.
+  `BaseHead.astro` builds `<link rel="canonical">` from `site`, so
+  changing it points every page away from the address those copies name.
 
 ## Only the build checks the code
 
