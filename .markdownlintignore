@@ -3,6 +3,6 @@
 # conflict with frontmatter + post structure.
 src/content/
 
-# No release here writes a CHANGELOG.md yet. A generated one is rewritten on
-# every release, so a lint fix to it is undone and returns as a conflict.
+# No release here writes a CHANGELOG.md. A generated one is rewritten on every
+# release, so a lint fix to it is undone and returns as a conflict.
 CHANGELOG.md

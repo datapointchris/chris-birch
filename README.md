@@ -142,9 +142,9 @@ pre-commit install --hook-type pre-commit --hook-type commit-msg  # file checks,
 ```
 
 `.pre-commit-config.yaml` lists the hooks. They are generic file checks.
-`validate.yml` runs the same hooks on every pull request and every push
-to `main`. None of them formats, lints or type-checks the Astro,
-TypeScript or CSS.
+`validate.yml` runs them on every pull request, and `deploy.yml` calls
+it on every push to `main`. None of them formats, lints or type-checks
+the Astro, TypeScript or CSS.
 
 `npm run build` is the one gate on the code. `astro build` does not
 type-check. `astro check` would, but `@astrojs/check` is not a
