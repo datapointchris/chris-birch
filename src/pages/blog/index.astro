@@ -21,31 +21,37 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<h1 class="page-title">Writing</h1>
-			<ul class="post-list">
-				{
-					posts.map((post) => (
-						<li class="post-row">
-							<a class="post-row__link" href={`/blog/${post.id}/`}>
-								{post.data.heroImage && (
-									<Image
-										class="post-row__image"
-										width={120}
-										height={120}
-										src={post.data.heroImage}
-										alt=""
-									/>
-								)}
-								<div class="post-row__content">
-									<h2 class="post-row__title">{post.data.title}</h2>
-									<p class="post-row__date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</div>
-							</a>
-						</li>
-					))
-				}
-			</ul>
+			{
+				posts.length === 0 ? (
+					<p class="post-list-empty">
+						No posts yet. A post is a Markdown or MDX file in <code>src/content/blog/</code>.
+					</p>
+				) : (
+					<ul class="post-list">
+						{posts.map((post) => (
+							<li class="post-row">
+								<a class="post-row__link" href={`/blog/${post.id}/`}>
+									{post.data.heroImage && (
+										<Image
+											class="post-row__image"
+											width={120}
+											height={120}
+											src={post.data.heroImage}
+											alt=""
+										/>
+									)}
+									<div class="post-row__content">
+										<h2 class="post-row__title">{post.data.title}</h2>
+										<p class="post-row__date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</div>
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
 		</main>
 		<Footer />
 
@@ -55,6 +61,11 @@ const posts = (await getCollection('blog')).sort(
 				font-size: var(--fs-800);
 				color: var(--clr-accent-light);
 				text-shadow: var(--deep-3d-text-shadow);
+			}
+
+			.post-list-empty {
+				margin: 0;
+				color: var(--clr-subtle);
 			}
 
 			.post-list {
