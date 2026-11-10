@@ -37,7 +37,7 @@ import { themes, fonts } from '../scripts/preferences';
 									type="button"
 									class="prefs__theme"
 									data-theme-id={t.id}
-									style={`background: ${t.swatch};`}
+									style={{ background: t.swatch }}
 								>
 									<span class="prefs__theme-name">{t.name}</span>
 								</button>
@@ -55,7 +55,7 @@ import { themes, fonts } from '../scripts/preferences';
 									type="button"
 									class="prefs__theme"
 									data-theme-id={t.id}
-									style={`background: ${t.swatch};`}
+									style={{ background: t.swatch }}
 								>
 									<span class="prefs__theme-name">{t.name}</span>
 								</button>
@@ -73,7 +73,7 @@ import { themes, fonts } from '../scripts/preferences';
 								type="button"
 								class="prefs__font"
 								data-font-id={f.id}
-								style={`font-family: ${f.family};`}
+								style={{ fontFamily: f.family }}
 							>
 								{f.name}
 							</button>
