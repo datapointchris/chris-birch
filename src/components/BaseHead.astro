@@ -3,7 +3,6 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
-import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
 import { STORAGE_KEY_FONT, STORAGE_KEY_THEME, fonts, themes } from '../scripts/preferences';
 
@@ -15,7 +14,9 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+// A page without its own image gets no link-preview image and a text-only card.
+const { title, description, image } = Astro.props;
+const imageURL = image && new URL(image.src, Astro.url);
 
 const firstPaint = {
 	themeKey: STORAGE_KEY_THEME,
@@ -65,14 +66,14 @@ const firstPaint = {
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+{imageURL && <meta property="og:image" content={imageURL} />}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:card" content={imageURL ? 'summary_large_image' : 'summary'} />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+{imageURL && <meta property="twitter:image" content={imageURL} />}
 
 <script>
 	import { initPreferencesInteractive } from '../scripts/preferences';

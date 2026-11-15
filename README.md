@@ -46,7 +46,8 @@ pubDate: '2026-10-18'
 
 `updatedDate` and `heroImage` are optional. `heroImage` is a path
 relative to the post. The build optimizes it, shows it above the post,
-and uses it as the link-preview image.
+and uses it as the link-preview image. A page without one carries no
+link-preview image.
 
 A post that fails the schema fails `npm run build`. The error names the
 post and each field that failed. The deploy runs the same
