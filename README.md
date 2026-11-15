@@ -64,7 +64,8 @@ images, and prose styles applied through Astro's `:global()`.
   `.markdownlintignore` skips `src/content/`, because doc-oriented rules
   such as a single top-level heading conflict with frontmatter.
   `.codespellrc` skips it too.
-- **Code blocks use Shiki's `github-dark` under every theme.**
+- **Code blocks use Shiki's `github-dark` under every theme.** It reads
+  well across all of them, where `nord` clashes with the warm ones.
 - **Nothing renders diagrams.** A `mermaid` fence is shown as
   highlighted source.
 - **`site` in `astro.config.mjs` is the canonical origin.** Every page's
@@ -105,7 +106,8 @@ declared by an `@font-face` in `src/styles/global.css`.
 Adding a theme takes an entry in `themes` and a rule in `global.css`.
 Adding a font takes an entry in `fonts`, a `[data-font]` rule, and
 either a URL in `googleFontUrls` or an `@font-face` with its `.woff2`.
-A returning visitor's browser holds the id they chose. Renaming a theme
+Astro's `fonts` config is not used, because it registers a fixed set at
+build time. A returning visitor's browser holds the id they chose. Renaming a theme
 or font sends them back to the default.
 
 `src/components/BaseHead.astro` opens with an `is:inline` script. It
@@ -131,8 +133,8 @@ The shadows are neumorphic. `--floating-box` and `--bubble-box` shape
 cards and containers. Each has a `-pressed` variant.
 
 **A shadow transition needs both lists to agree on `inset`, position by
-position.** Where they differ, the browser swaps the shadow at once
-instead of animating it. `--floating-box` and `--bubble-box` do not
+position.** Where they differ, the CSS Backgrounds and Borders spec
+swaps the shadow at once instead of animating it. `--floating-box` and `--bubble-box` do not
 align. So the post-row hover on the blog index fades in a `::before`
 holding `--bubble-box` rather than transitioning `box-shadow`.
 
@@ -148,8 +150,8 @@ it on every push to `main`. None of them formats, lints or type-checks
 the Astro, TypeScript or CSS.
 
 `npm run build` is the one gate on the code. `astro build` does not
-type-check. `astro check` would, but `@astrojs/check` is not a
-dependency. The strict `tsconfig.json` is enforced by nothing but an
+type-check. `astro check` would, but neither `@astrojs/check` nor
+`typescript` is a dependency. The strict `tsconfig.json` is enforced by nothing but an
 editor.
 
 ## Deployment — the workflow ends at an artifact
