@@ -93,9 +93,9 @@ writes would cost the site Astro's zero-JavaScript default.
   preview derived from the CSS variables looks the same for every color
   theme. They share one lightness and chroma. A hue difference at that
   chroma is invisible at chip size.
-- **There is no random theme.** The first-paint script applies the
-  stored id as written. A random choice would have to resolve to a
-  concrete theme before being stored.
+- **There is no random theme.** The first-paint script applies a
+  stored id only when it is in `themes` or `fonts`. A random choice
+  would have to resolve to a concrete theme before being stored.
 
 Ubuntu Mono is the default font. Every page loads it from Google
 Fonts. Another Google font loads when a visitor picks it, and on each
@@ -112,9 +112,10 @@ or font sends them back to the default.
 reads the stored theme and font and sets the attributes before the page
 paints. It must stay `is:inline`. Astro bundles an ordinary `<script>`
 as a deferred module, which runs after first paint and flashes the
-default theme. An inline script cannot import. It spells the storage
-keys a second time. The `STORAGE_KEY_*` constants in `preferences.ts`
-change together with the strings in that script.
+default theme. An inline script cannot import. So the component's
+frontmatter reads the `STORAGE_KEY_*` constants and the ids in `themes`
+and `fonts` from `preferences.ts`, and `define:vars` writes them into
+the script.
 
 ## The tokens — every color and shadow comes from `global.css`
 

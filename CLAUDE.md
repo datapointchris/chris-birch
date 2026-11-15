@@ -48,9 +48,10 @@ paints. It must stay `is:inline`. Astro bundles an ordinary `<script>`
 as a deferred module, which runs after first paint and flashes the
 default theme.
 
-An inline script is not bundled and cannot import. So it spells the
-storage keys a second time, and the `STORAGE_KEY_*` constants in
-`preferences.ts` change together with the strings in that script.
+An inline script is not bundled and cannot import. So the frontmatter
+passes it the `STORAGE_KEY_*` constants and the theme and font ids from
+`preferences.ts` through `define:vars`, and it applies only a stored id
+in those lists.
 
 ## Color and shadow come only from the tokens
 
