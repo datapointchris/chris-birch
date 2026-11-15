@@ -188,11 +188,11 @@ export function getStoredFont(): string | null {
 	return localStorage.getItem(STORAGE_KEY_FONT);
 }
 
-/* Loads any Google Font that the inline init script set as the
- * active --ff-base. The init script can only set the data-font
- * attribute synchronously; the actual stylesheet has to be appended
- * via JS, which only runs after hydration. Safe to call on every
- * page load — loadGoogleFont dedupes. */
+/* Loads the Google Font stylesheet for the stored font. The inline
+ * first-paint script in BaseHead.astro sets only the data-font
+ * attribute. This runs from the bundled module script BaseHead.astro
+ * also loads, which Astro defers until the document has parsed.
+ * loadGoogleFont skips a font whose stylesheet it already added. */
 export function hydrateGoogleFontIfNeeded() {
 	const fontId = getStoredFont();
 	if (!fontId) return;
